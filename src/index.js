@@ -11,6 +11,7 @@ class Application extends Component {
         <section className="controls">
           <button>Increment</button>
           <button>Decrement</button>
+          <button>Reset</button>
         </section>
       </main>
     );
