@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import './styles.scss';
 
-class Application extends Component {
+class Counter extends Component {
   render() {
     return (
       <main className="Counter">
@@ -18,4 +18,4 @@ class Application extends Component {
   }
 }
 
-render(<Application />, document.getElementById('root'));
+render(<Counter />, document.getElementById('root'));
