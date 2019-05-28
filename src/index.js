@@ -1,45 +1,50 @@
-import React, { Component } from 'react';
+import React, { useState, createContext } from 'react';
 import { render } from 'react-dom';
 
 import './styles.scss';
 
-const inc = ({ count }) => ({ count: count + 1 });
-const dec = ({ count }) => ({ count: count - 1 });
-const res = () => ({ count: 0 });
+const CounterContext = createContext();
 
-class Counter extends Component {
-  state = { count: parseInt(localStorage.getItem('count'), 10) || 0 };
+const CounterProvider = ({ children }) => {
+  const [count, setCount] = useState(0);
 
-  increment = () => {
-    this.setState(this.props.onIncrement, () =>
-      localStorage.setItem('count', this.state.count),
-    );
-  };
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+  const reset = () => setCount(0);
 
-  decrement = () => {
-    this.setState(dec);
-  };
+  return (
+    <CounterContext.Provider value={{ increment, decrement, reset, count }}>
+      {children}
+    </CounterContext.Provider>
+  );
+};
 
-  reset = () => {
-    this.setState(res);
-  };
-
-  render() {
-    const { count } = this.state;
-    return (
-      <main className="Counter">
-        <p className="count">{count}</p>
-        <section className="controls">
-          <button onClick={this.increment}>Increment</button>
-          <button onClick={this.decrement}>Decrement</button>
-          <button onClick={this.reset}>Reset</button>
-        </section>
-      </main>
-    );
-  }
-}
+const Counter = ({ count, increment, decrement, reset }) => {
+  console.log({ count, increment });
+  return (
+    <main className="Counter">
+      <p className="count">{count}</p>
+      <section className="controls">
+        <button onClick={increment}>Increment</button>
+        <button onClick={decrement}>Decrement</button>
+        <button onClick={reset}>Reset</button>
+      </section>
+    </main>
+  );
+};
 
 render(
-  <Counter onIncrement={state => ({ count: state.count + 100 })} />,
+  <CounterProvider>
+    <CounterContext.Consumer>
+      {({ count, increment, decrement, reset }) => (
+        <Counter
+          count={count}
+          increment={increment}
+          decrement={decrement}
+          reset={reset}
+        />
+      )}
+    </CounterContext.Consumer>
+  </CounterProvider>,
   document.getElementById('root'),
 );
