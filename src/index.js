@@ -19,8 +19,11 @@ const CounterProvider = ({ children }) => {
   );
 };
 
-const Counter = ({ count, increment, decrement, reset }) => {
-  console.log({ count, increment });
+const Counter = () => {
+  const { count, increment, decrement, reset } = React.useContext(
+    CounterContext,
+  );
+
   return (
     <main className="Counter">
       <p className="count">{count}</p>
@@ -35,16 +38,7 @@ const Counter = ({ count, increment, decrement, reset }) => {
 
 render(
   <CounterProvider>
-    <CounterContext.Consumer>
-      {({ count, increment, decrement, reset }) => (
-        <Counter
-          count={count}
-          increment={increment}
-          decrement={decrement}
-          reset={reset}
-        />
-      )}
-    </CounterContext.Consumer>
+    <Counter />
   </CounterProvider>,
   document.getElementById('root'),
 );
