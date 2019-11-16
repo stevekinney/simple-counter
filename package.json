@@ -1,19 +1,23 @@
 {
-  "name": "new",
+  "name": "simple-counter",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple counter application for demonstrating state management",
   "keywords": [],
   "main": "src/index.js",
+  "repository": {
+    "url": "https://github.com/stevekinney/simple-counter"
+  },
+  "license": "MIT",
   "dependencies": {
-    "@babel/plugin-proposal-decorators": "7.4.4",
-    "node-sass": "^4.12.0",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-scripts": "2.1.8",
-    "use-query-params": "^0.3.2"
+    "@babel/plugin-proposal-decorators": "7.7.0",
+    "node-sass": "^4.13.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.2.0",
+    "use-query-params": "^0.4.5"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
+    "typescript": "3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
