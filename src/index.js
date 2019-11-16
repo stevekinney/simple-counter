@@ -3,6 +3,11 @@ import { render } from 'react-dom';
 
 import './styles.scss';
 
+const increment = (state, props) => {
+  if (state.count >= props.max) return;
+  return { count: state.count + 1 };
+};
+
 class Counter extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +21,7 @@ class Counter extends Component {
   }
 
   increment() {
-    this.setState({ count: this.state.count + 1 });
+    this.setState(increment);
   }
 
   decrement() {
@@ -43,4 +48,4 @@ class Counter extends Component {
   }
 }
 
-render(<Counter />, document.getElementById('root'));
+render(<Counter max={10} />, document.getElementById('root'));
