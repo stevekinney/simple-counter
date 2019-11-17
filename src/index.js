@@ -10,6 +10,12 @@ const Counter = ({ max }) => {
   const decrement = () => setCount(count - 1);
   const reset = () => setCount(0);
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      console.log(`You clicked ${count} times`);
+    }, 3000);
+  }, [count]);
+
   return (
     <main className="Counter">
       <p className="count">{count}</p>
