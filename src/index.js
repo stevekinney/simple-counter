@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 
 import './styles.scss';
@@ -15,12 +15,12 @@ const useLocalStorage = (defaultValue, key) => {
 
   React.useEffect(() => {
     localStorage.setItem(key, JSON.stringify({ value }));
-  }, [value]);
+  }, [value, key]);
 
   return [value, setValue];
 };
 
-const Counter = ({ max }) => {
+const Counter = () => {
   const [count, setCount] = useLocalStorage(0, 'count');
 
   const increment = () => setCount(count + 1);
