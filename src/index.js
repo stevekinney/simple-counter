@@ -11,25 +11,36 @@ const increment = (state, props) => {
 class Counter extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 3,
-    };
+    this.state = this.getStateFromLocalStorage();
 
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
     this.reset = this.reset.bind(this);
   }
 
+  getStateFromLocalStorage() {
+    const storage = localStorage.getItem('counterState');
+    if (storage) return JSON.parse(storage);
+    return { count: 0 };
+  }
+
+  storeStateInLocalStorage() {
+    localStorage.setItem('counterState', JSON.stringify(this.state));
+  }
+
   increment() {
-    this.setState(increment);
+    this.setState(increment, this.storeStateInLocalStorage);
   }
 
   decrement() {
-    this.setState({ count: this.state.count - 1 });
+    this.setState(
+      { count: this.state.count - 1 },
+      this.storeStateInLocalStorage,
+    );
   }
 
   reset() {
-    this.setState({ count: 0 });
+    this.setState({ count: 0 }, this.storeStateInLocalStorage);
   }
 
   render() {
