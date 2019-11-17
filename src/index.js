@@ -3,8 +3,27 @@ import { render } from 'react-dom';
 
 import './styles.scss';
 
+const getStateFromLocalStorage = (defaultValue, key) => {
+  const storage = localStorage.getItem(key);
+  if (storage) return JSON.parse(storage).value;
+  console.log({ storage });
+  return defaultValue;
+};
+
+const useLocalStorage = (defaultValue, key) => {
+  console.log('useLocalStorage');
+  const initialValue = getStateFromLocalStorage(defaultValue, key);
+  const [value, setValue] = React.useState(initialValue);
+
+  React.useEffect(() => {
+    localStorage.setItem(key, JSON.stringify({ value }));
+  }, [value]);
+
+  return [value, setValue];
+};
+
 const Counter = ({ max }) => {
-  const [count, setCount] = React.useState(0);
+  const [count, setCount] = useLocalStorage(0, 'count');
 
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count - 1);
