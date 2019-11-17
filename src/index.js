@@ -6,12 +6,10 @@ import './styles.scss';
 const getStateFromLocalStorage = (defaultValue, key) => {
   const storage = localStorage.getItem(key);
   if (storage) return JSON.parse(storage).value;
-  console.log({ storage });
   return defaultValue;
 };
 
 const useLocalStorage = (defaultValue, key) => {
-  console.log('useLocalStorage');
   const initialValue = getStateFromLocalStorage(defaultValue, key);
   const [value, setValue] = React.useState(initialValue);
 
