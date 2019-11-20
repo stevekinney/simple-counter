@@ -6,18 +6,21 @@ import './styles.scss';
 const Counter = ({ max }) => {
   const [count, setCount] = React.useState(0);
 
+  const countRef = React.useRef();
+  let message = '';
+
+  if (countRef.current < count) message = 'Higher';
+  if (countRef.current > count) message = 'Lower';
+
+  countRef.current = count;
+
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count - 1);
   const reset = () => setCount(0);
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      console.log(`You clicked ${count} times`);
-    }, 3000);
-  }, [count]);
-
   return (
     <main className="Counter">
+      <p>{message}</p>
       <p className="count">{count}</p>
       <section className="controls">
         <button onClick={increment}>Increment</button>
