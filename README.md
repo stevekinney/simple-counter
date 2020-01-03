@@ -1,6 +1,6 @@
 # From Component State to Hooks
 
-We're going to start with a [super simple counter](https://github.com/stevekinney/simple-counter).
+We're going to start with a super simple counter [(edit on CodeSandbox)](https://codesandbox.io/s/github/stevekinney/simple-counter).
 
 Out of the box, it doesn't have a lot going on.
 
